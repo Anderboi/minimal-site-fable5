@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#DCDEDD"/>
+      <stop offset="1" stop-color="#AEB4B2"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g filter="url(#grain)"><rect width="1600" height="1100" fill="url(#wash)"/>
+  <rect y="812" width="1600" height="287.87440000000004" fill="#AEB4B2" opacity="0.55"/>
+  <rect y="812" width="1600" height="3" fill="#2C3230" opacity="0.25"/>
+  <rect x="383.28000000000003" y="106.94309999999984" width="514.144" height="705.1825000000001" fill="#6E7674" opacity="0.85"/>
+  <rect x="1109" y="0" width="19" height="812.1256" fill="#FFFFFF" opacity="0.34"/>
+  <rect x="371" y="733" width="490" height="79" rx="14" fill="#2C3230" opacity="0.73"/>
+  <circle cx="337" cy="210" r="140" fill="#FFFFFF" opacity="0.18"/></g>
+</svg>

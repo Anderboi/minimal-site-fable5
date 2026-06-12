@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>минимал — студия дизайна интерьера</title>
+  <meta name="description" content="минимал — российская студия дизайна интерьера. Проектируем тихие, функциональные пространства: квартиры, дома, апартаменты. Москва и вся Россия.">
+  <meta property="og:title" content="минимал — студия дизайна интерьера">
+  <meta property="og:description" content="Проектируем тихие, функциональные пространства. Дизайн-проекты под ключ по всей России.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2317150F'/><rect x='8' y='14' width='16' height='4' fill='%23EFECE6'/></svg>">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="home">
+
+  <!-- Прелоадер -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <span class="preloader__logo">минимал<sup>®</sup></span>
+      <span class="preloader__count">00</span>
+    </div>
+  </div>
+
+  <!-- Кастомный курсор (только desktop) -->
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <header class="header">
+    <a class="header__logo" href="index.html" aria-label="минимал — на главную">минимал<sup>®</sup></a>
+    <nav class="header__nav" aria-label="Основная навигация">
+      <a href="#projects" data-scroll>проекты</a>
+      <a href="#studio" data-scroll>студия</a>
+      <a href="#pricing" data-scroll>стоимость</a>
+      <a href="#contacts" data-scroll>контакты</a>
+    </nav>
+    <button class="header__burger" aria-label="Открыть меню" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Мобильное меню -->
+  <div class="menu" aria-hidden="true">
+    <nav class="menu__nav" aria-label="Мобильная навигация">
+      <a href="#projects" data-scroll><em>01</em>проекты</a>
+      <a href="#studio" data-scroll><em>02</em>студия</a>
+      <a href="#pricing" data-scroll><em>03</em>стоимость</a>
+      <a href="#contacts" data-scroll><em>04</em>контакты</a>
+    </nav>
+    <div class="menu__footer">
+      <a href="mailto:hello@minimal.studio">hello@minimal.studio</a>
+      <a href="tel:+74951234567">+7 495 123-45-67</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero__eyebrow">
+        <span>студия дизайна интерьера</span>
+        <span>москва · россия</span>
+      </div>
+      <h1 class="hero__title" aria-label="минимал">
+        <span class="hero__line"><span>мини</span></span>
+        <span class="hero__line hero__line--shift"><span>мал<em class="hero__reg">®</em></span></span>
+      </h1>
+      <p class="hero__sub">
+        <span class="hero__line"><span>Проектируем пространства, в&nbsp;которых</span></span>
+        <span class="hero__line"><span><i>тихо</i>, светло и&nbsp;ничего лишнего.</span></span>
+      </p>
+      <div class="hero__meta">
+        <span>осн. 2016</span>
+        <a href="#projects" data-scroll class="hero__scroll">смотреть проекты<i>↓</i></a>
+        <span>87 реализованных проектов</span>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>дизайн-проект — авторский надзор — комплектация — реализация под ключ — </span><span>дизайн-проект — авторский надзор — комплектация — реализация под ключ — </span>
+      </div>
+    </div>
+
+    <!-- ============ ПРОЕКТЫ ============ -->
+    <section class="projects section" id="projects">
+      <header class="section__head">
+        <h2 class="section__title"><span>избранные</span> <span><i>проекты</i></span></h2>
+        <span class="section__count" data-projects-count>(00)</span>
+      </header>
+      <div class="projects__list" data-projects-list>
+        <!-- рендерится из data/projects.json -->
+      </div>
+    </section>
+
+    <!-- ============ СТУДИЯ ============ -->
+    <section class="studio section" id="studio">
+      <header class="section__head">
+        <h2 class="section__title"><span>студия</span></h2>
+        <span class="section__count">(о нас)</span>
+      </header>
+      <p class="studio__manifesto" data-split>
+        Мы&nbsp;убираем лишнее, пока не&nbsp;останется главное. Девять лет проектируем квартиры, дома и&nbsp;апартаменты по&nbsp;всей России&nbsp;— от&nbsp;первой планировки до&nbsp;расстановки книг на&nbsp;полках. Минимализм для нас не&nbsp;стиль, а&nbsp;способ освободить место для жизни.
+      </p>
+      <div class="studio__stats">
+        <div class="stat"><b data-counter="9">0</b><span>лет практики</span></div>
+        <div class="stat"><b data-counter="87">0</b><span>проектов</span></div>
+        <div class="stat"><b data-counter="12400">0</b><span>м² спроектировано</span></div>
+        <div class="stat"><b data-counter="14">0</b><span>наград и публикаций</span></div>
+      </div>
+      <ul class="studio__principles">
+        <li><em>01</em><h3>Тишина</h3><p>Интерьер не должен требовать внимания. Хороший дом — тот, в котором отдыхают глаза.</p></li>
+        <li><em>02</em><h3>Функция</h3><p>Сначала сценарии жизни, потом картинка. Каждый метр работает, каждая вещь на своём месте.</p></li>
+        <li><em>03</em><h3>Материал</h3><p>Дерево, камень, известь, лён. Настоящие материалы стареют красиво и не выходят из моды.</p></li>
+        <li><em>04</em><h3>Ответственность</h3><p>Ведём проект до конца: чертежи, надзор, комплектация. Сдаём дом, а не альбом с картинками.</p></li>
+      </ul>
+    </section>
+
+    <!-- ============ СТОИМОСТЬ ============ -->
+    <section class="pricing section section--dark" id="pricing">
+      <header class="section__head">
+        <h2 class="section__title"><span>стоимость</span> <span><i>работ</i></span></h2>
+        <span class="section__count">(03 формата)</span>
+      </header>
+
+      <div class="pricing__grid">
+        <article class="price-card">
+          <header>
+            <em>01</em>
+            <h3>Планировочное решение</h3>
+          </header>
+          <p class="price-card__price">от 3 500 ₽/м²</p>
+          <ul>
+            <li>обмерный план</li>
+            <li>3 варианта планировки</li>
+            <li>финальная планировка с расстановкой мебели</li>
+            <li>консультация по материалам</li>
+          </ul>
+          <p class="price-card__term">срок — от 3 недель</p>
+        </article>
+
+        <article class="price-card price-card--featured">
+          <header>
+            <em>02</em>
+            <h3>Полный дизайн-проект</h3>
+          </header>
+          <p class="price-card__price">от 7 900 ₽/м²</p>
+          <ul>
+            <li>всё из планировочного решения</li>
+            <li>концепция и коллажи</li>
+            <li>фотореалистичные визуализации</li>
+            <li>полный комплект рабочих чертежей</li>
+            <li>ведомости отделки и спецификации</li>
+          </ul>
+          <p class="price-card__term">срок — от 2,5 месяцев</p>
+        </article>
+
+        <article class="price-card">
+          <header>
+            <em>03</em>
+            <h3>Проект + сопровождение</h3>
+          </header>
+          <p class="price-card__price">от 11 500 ₽/м²</p>
+          <ul>
+            <li>всё из полного дизайн-проекта</li>
+            <li>авторский надзор до сдачи объекта</li>
+            <li>комплектация и закупки</li>
+            <li>приёмка работ у подрядчиков</li>
+            <li>финальная стилизация</li>
+          </ul>
+          <p class="price-card__term">срок — весь цикл стройки</p>
+        </article>
+      </div>
+
+      <div class="pricing__steps">
+        <h3 class="pricing__steps-title">как мы работаем</h3>
+        <ol>
+          <li><em>01</em><span>Знакомство и брифинг</span></li>
+          <li><em>02</em><span>Планировка и концепция</span></li>
+          <li><em>03</em><span>Визуализации</span></li>
+          <li><em>04</em><span>Рабочая документация</span></li>
+          <li><em>05</em><span>Надзор и комплектация</span></li>
+        </ol>
+        <p class="pricing__note">Точную стоимость считаем после знакомства с объектом — пришлите план квартиры, ответим в течение дня.</p>
+      </div>
+    </section>
+
+    <!-- ============ КОНТАКТЫ ============ -->
+    <section class="contacts section section--dark" id="contacts">
+      <p class="contacts__intro">есть проект?</p>
+      <a class="contacts__cta" href="mailto:hello@minimal.studio?subject=Проект%20для%20студии%20минимал">
+        <span class="contacts__cta-line"><span>обсудим</span></span>
+        <span class="contacts__cta-line"><span><i>ваш дом</i> →</span></span>
+      </a>
+      <div class="contacts__grid">
+        <div>
+          <h4>почта</h4>
+          <a href="mailto:hello@minimal.studio">hello@minimal.studio</a>
+        </div>
+        <div>
+          <h4>телефон</h4>
+          <a href="tel:+74951234567">+7 495 123-45-67</a>
+        </div>
+        <div>
+          <h4>мессенджеры</h4>
+          <a href="https://t.me/minimal_studio" target="_blank" rel="noopener">telegram</a>
+          <a href="https://wa.me/74951234567" target="_blank" rel="noopener">whatsapp</a>
+        </div>
+        <div>
+          <h4>студия</h4>
+          <p>Москва, Большая Никитская, 12<br>пн–пт, 10:00–19:00</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© 2016–2026 минимал<sup>®</sup></span>
+    <a href="#top" data-scroll>наверх ↑</a>
+    <span>сделано тихо</span>
+  </footer>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/ScrollToPlugin.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

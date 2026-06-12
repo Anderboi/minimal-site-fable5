@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2000" viewBox="0 0 1600 2000">
+  <defs>
+    <linearGradient id="wash" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#E6E4E0"/>
+      <stop offset="1" stop-color="#C7C3BC"/>
+    </linearGradient>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g filter="url(#grain)"><rect width="1600" height="2000" fill="url(#wash)"/>
+  <rect y="1249" width="1600" height="751.2160000000001" fill="#C7C3BC" opacity="0.55"/>
+  <rect y="1249" width="1600" height="3" fill="#3A3835" opacity="0.25"/>
+  <path d="M 359.44000000000005 1248.7839999999999 V 527.2919999999999 A 244.20800000000003 244.20800000000003 0 0 1 847.8560000000001 527.2919999999999 V 1248.7839999999999 Z" fill="#8E8A82" opacity="0.85"/>
+  <rect x="1348" y="0" width="19" height="1248.7839999999999" fill="#FFFFFF" opacity="0.36"/>
+  <rect x="903" y="1050" width="343" height="199" rx="36" fill="#3A3835" opacity="0.87"/>
+  <rect x="660" y="1043" width="239" height="206" rx="37" fill="#3A3835" opacity="0.77"/>
+  <circle cx="399" cy="506" r="165" fill="#FFFFFF" opacity="0.18"/></g>
+</svg>
