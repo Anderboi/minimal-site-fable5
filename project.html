@@ -5,19 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>проект — минимал</title>
   <meta name="description" content="Проект студии дизайна интерьера минимал.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2317150F'/><rect x='8' y='14' width='16' height='4' fill='%23EFECE6'/></svg>">
+  <meta name="theme-color" content="#0e0d0b">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230E0D0B'/><rect x='7' y='14' width='18' height='4' fill='%23D6491F'/></svg>">
   <link rel="stylesheet" href="assets/fonts/fonts.css">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="project">
 
-  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor__dot"></span>
+    <span class="cursor__ring"><span class="cursor__label"></span></span>
+  </div>
+
+  <div class="progress" aria-hidden="true"></div>
 
   <header class="header">
     <a class="header__logo" href="index.html" aria-label="минимал — на главную">минимал<sup>®</sup></a>
     <nav class="header__nav" aria-label="Основная навигация">
       <a href="index.html#projects">← все проекты</a>
-      <a href="index.html#contacts">контакты</a>
+      <a href="index.html#contacts" class="header__cta">обсудить проект</a>
     </nav>
     <button class="header__burger" aria-label="Открыть меню" aria-expanded="false">
       <span></span><span></span>

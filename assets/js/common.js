@@ -7,17 +7,17 @@
   M.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   M.hasGsap = typeof window.gsap !== "undefined";
   M.isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  M.anim = M.hasGsap && !M.reducedMotion;
 
   if (M.reducedMotion) document.documentElement.classList.add("reduced-motion");
+  if (!M.anim) document.documentElement.classList.add("no-anim");
 
-  if (M.hasGsap) {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-  }
+  if (M.hasGsap) gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
   /* ---------- плавный скролл (Lenis) ---------- */
   M.lenis = null;
   if (typeof window.Lenis !== "undefined" && !M.reducedMotion && !M.isTouch) {
-    M.lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    M.lenis = new Lenis({ duration: 1.15, smoothWheel: true });
     M.lenis.on("scroll", () => { if (M.hasGsap) ScrollTrigger.update(); });
     if (M.hasGsap) {
       gsap.ticker.add((t) => M.lenis.raf(t * 1000));
@@ -63,16 +63,21 @@
     })
   );
 
-  /* ---------- кастомный курсор ---------- */
+  /* ---------- курсор: точка + кольцо ---------- */
   const cursor = document.querySelector(".cursor");
-  if (cursor && M.hasGsap && !M.isTouch && !M.reducedMotion) {
+  if (cursor && M.anim && !M.isTouch) {
+    const dot = cursor.querySelector(".cursor__dot");
+    const ring = cursor.querySelector(".cursor__ring");
     const label = cursor.querySelector(".cursor__label");
-    const toX = gsap.quickTo(cursor, "x", { duration: 0.35, ease: "power3" });
-    const toY = gsap.quickTo(cursor, "y", { duration: 0.35, ease: "power3" });
-    gsap.set(cursor, { opacity: 0 }); // не показываем точку, пока мышь не сдвинулась
+    gsap.set(cursor, { opacity: 0 });
+    const dx = gsap.quickTo(dot, "x", { duration: 0.12, ease: "power2" });
+    const dy = gsap.quickTo(dot, "y", { duration: 0.12, ease: "power2" });
+    const rx = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3" });
+    const ry = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3" });
     window.addEventListener("pointermove", (e) => {
       gsap.set(cursor, { opacity: 1 });
-      toX(e.clientX); toY(e.clientY);
+      dx(e.clientX); dy(e.clientY);
+      rx(e.clientX); ry(e.clientY);
     });
     document.addEventListener("pointerover", (e) => {
       const t = e.target.closest("[data-cursor]");
@@ -85,6 +90,49 @@
       if (e.target.closest("[data-cursor]")) cursor.classList.remove("is-hover");
     });
   }
+
+  /* ---------- индикатор прокрутки ---------- */
+  const progress = document.querySelector(".progress");
+  if (progress && M.anim) {
+    gsap.to(progress, {
+      scaleX: 1,
+      ease: "none",
+      scrollTrigger: { trigger: document.body, start: "top top", end: "max", scrub: 0.3 },
+    });
+  }
+
+  /* ---------- разбиение текста ---------- */
+  // каждую букву — в спан с маской (.ch > .ch__in)
+  M.splitChars = function (el) {
+    const text = el.textContent.replace(/­/g, "").trim();
+    el.setAttribute("aria-label", el.getAttribute("aria-label") || text);
+    el.innerHTML = [...text]
+      .map((c) => (c === " " ? " " : `<span class="ch" aria-hidden="true"><span class="ch__in">${c}</span></span>`))
+      .join("");
+    return el.querySelectorAll(".ch__in");
+  };
+
+  // текст — на реальные строки (по позициям слов) с масками (.ln > .ln__in)
+  M.splitLines = function (el) {
+    const text = el.textContent.trim().replace(/\s+/g, " ");
+    el.innerHTML = text.split(" ").map((w) => `<span class="w">${w}</span>`).join(" ");
+    const words = [...el.querySelectorAll(".w")];
+    const lines = [];
+    let top = null, current = [];
+    for (const w of words) {
+      if (top === null || Math.abs(w.offsetTop - top) > 4) {
+        if (current.length) lines.push(current);
+        current = [];
+        top = w.offsetTop;
+      }
+      current.push(w.textContent);
+    }
+    if (current.length) lines.push(current);
+    el.innerHTML = lines
+      .map((ws) => `<span class="ln"><span class="ln__in">${ws.join(" ")}</span></span>`)
+      .join("");
+    return el.querySelectorAll(".ln__in");
+  };
 
   /* ---------- данные проектов ---------- */
   let cache = null;

@@ -2,8 +2,13 @@
 
 Одностраничный лендинг (проекты → студия → стоимость → контакты) + отдельная
 страница для каждого проекта. Без сборки и зависимостей: чистый HTML/CSS/JS,
-анимации на GSAP (ScrollTrigger) и плавный скролл на Lenis — всё лежит локально
-в `assets/vendor/`, сайту не нужны внешние CDN.
+анимации на GSAP (ScrollTrigger), плавный скролл на Lenis, WebGL-шейдер света
+в hero (без Three.js, чистый WebGL) — всё лежит локально в `assets/vendor/`,
+сайту не нужны внешние CDN.
+
+Ключевые приёмы: горизонтальный pinned-скролл проектов (на десктопе),
+шлейф картинок за курсором в секции «студия», stacking-карточки тарифов,
+аккордеон принципов, побуквенные маски заголовков (Unbounded + Cormorant).
 
 ## Запуск
 
@@ -90,10 +95,11 @@ project.html            — шаблон страницы проекта (?p=slu
 data/projects.json      — ЕДИНСТВЕННЫЙ файл, который нужно править
 assets/css/style.css    — стили
 assets/js/common.js     — общее: плавный скролл, меню, курсор, загрузка данных
-assets/js/main.js       — логика главной
+assets/js/main.js       — логика главной (горизонтальный скролл, шлейф, аккордеон)
+assets/js/hero-gl.js    — WebGL-шейдер света в hero
 assets/js/project.js    — логика страницы проекта
 assets/vendor/          — GSAP, ScrollTrigger, Lenis (локально)
-assets/fonts/           — Manrope и Cormorant Garamond (self-hosted, кириллица)
+assets/fonts/           — Unbounded, Manrope, Cormorant Garamond (self-hosted, кириллица)
 tools/                  — генератор SVG-заглушек
 ```
 

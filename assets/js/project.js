@@ -20,10 +20,10 @@
 
     return `
       <section class="phero">
-        <p class="phero__kicker reveal">проект ${M.pad2(index)} / ${String(total).padStart(2, "0")}</p>
-        <h1 class="phero__title"><span class="hero__line"><span>${esc(p.name)}</span></span></h1>
-        <p class="phero__tagline reveal">${esc(p.tagline)}</p>
-        <ul class="phero__meta reveal">
+        <p class="phero__kicker rv">проект ${M.pad2(index)} / ${String(total).padStart(2, "0")} — ${esc(p.type.toLowerCase())}</p>
+        <h1 class="phero__title" data-chars>${esc(p.name)}</h1>
+        <p class="phero__tagline rv">${esc(p.tagline)}</p>
+        <ul class="phero__meta rv">
           ${meta.map(([k, v]) => `<li><span>${k}</span><b>${esc(v)}</b></li>`).join("")}
         </ul>
       </section>
@@ -33,11 +33,11 @@
       </figure>
 
       <section class="pbody">
-        <div class="pblock reveal">
+        <div class="pblock rv">
           <h2>задача</h2>
           <div><p>${esc(p.task)}</p></div>
         </div>
-        <div class="pblock reveal">
+        <div class="pblock rv">
           <h2>решение</h2>
           <div>${p.description.map((par) => `<p>${esc(par)}</p>`).join("")}</div>
         </div>
@@ -47,40 +47,40 @@
         ${p.images
           .map(
             (src, i) =>
-              `<figure class="reveal"><img src="${esc(src)}" alt="${esc(p.name)} — фото ${i + 1}" loading="lazy"></figure>`
+              `<figure class="rv"><img src="${esc(src)}" alt="${esc(p.name)} — фото ${i + 1}" loading="lazy"></figure>`
           )
           .join("")}
       </section>
 
       <section class="pfacts">
-        ${p.facts.map((f) => `<div class="reveal"><b>${esc(f.value)}</b><span>${esc(f.label)}</span></div>`).join("")}
+        ${p.facts.map((f) => `<div class="rv"><b>${esc(f.value)}</b><span>${esc(f.label)}</span></div>`).join("")}
       </section>
 
       <a class="pnext" href="project.html?p=${encodeURIComponent(next.slug)}" data-cursor="перейти">
         <em>следующий проект</em>
-        <b>${esc(next.name)} →</b>
+        <b>${esc(next.name)}</b>
       </a>`;
   }
 
   function animate() {
-    if (!M.hasGsap || M.reducedMotion) {
-      document.querySelectorAll(".reveal").forEach((el) => el.classList.remove("reveal"));
+    if (!M.anim) {
+      document.querySelectorAll(".rv").forEach((el) => el.classList.remove("rv"));
       return;
     }
 
-    gsap.from(".phero__title .hero__line > span", {
-      yPercent: 110,
-      duration: 1.2,
+    const chars = M.splitChars(document.querySelector(".phero__title"));
+    gsap.set(chars, { yPercent: 112 });
+    gsap.to(chars, {
+      yPercent: 0,
+      duration: 1.15,
+      stagger: { each: 0.05, from: "random" },
       ease: "power4.out",
       delay: 0.15,
     });
 
-    document.querySelectorAll(".reveal").forEach((el) => {
+    document.querySelectorAll(".rv").forEach((el) => {
       gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
+        opacity: 1, y: 0, duration: 1, ease: "power3.out",
         scrollTrigger: { trigger: el, start: "top 90%" },
       });
     });
@@ -89,10 +89,10 @@
     document.querySelectorAll(".pcover img, .pgallery img").forEach((img) => {
       gsap.fromTo(
         img,
-        { yPercent: -5, scale: 1.1 },
+        { yPercent: -5, scale: 1.12 },
         {
           yPercent: 5,
-          scale: 1.1,
+          scale: 1.12,
           ease: "none",
           scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true },
         }
