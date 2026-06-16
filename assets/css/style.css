@@ -199,14 +199,80 @@ body.menu-open .menu__nav a:nth-child(4) { transition-delay: 0.43s; }
   display: flex; flex-direction: column; justify-content: space-between;
   padding: calc(64px + 2svh) var(--pad) clamp(20px, 3svh, 40px);
   overflow: hidden;
-  background: radial-gradient(120% 90% at 75% 0%, #2a2118 0%, var(--ink) 55%);
+  background: var(--ink);
 }
-.hero__gl, .hero__veil { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* — сцена света: всё на CSS-компоновке (GPU), без перерисовки по кадрам — */
+.hero__stage, .hero__veil { position: absolute; inset: 0; pointer-events: none; }
+.hero__stage { overflow: hidden; }
+.hero__stage > span { position: absolute; display: block; will-change: transform; }
+
+/* тёплый ключевой свет сверху-справа + мягкая отсветка снизу */
+.hero__stage::before {
+  content: ""; position: absolute; inset: -10%;
+  background:
+    radial-gradient(58% 50% at 78% -6%, rgba(214, 132, 64, 0.5) 0%, rgba(120, 70, 32, 0.16) 34%, transparent 62%),
+    radial-gradient(70% 60% at 18% 116%, rgba(214, 73, 31, 0.16) 0%, transparent 55%);
+}
+
+/* диагональный объёмный луч, медленно дышит и сдвигается */
+.hero__beam {
+  top: -40%; left: 22%; width: 46%; height: 190%;
+  background: linear-gradient(180deg, rgba(255, 214, 158, 0.22), rgba(255, 196, 130, 0.05) 46%, transparent 72%);
+  filter: blur(48px);
+  transform: rotate(16deg);
+  transform-origin: top center;
+  opacity: 0.85;
+  animation: beamDrift 13s var(--ease) infinite alternate;
+}
+@keyframes beamDrift {
+  0%   { transform: rotate(13deg) translateX(-3%); opacity: 0.7; }
+  100% { transform: rotate(19deg) translateX(4%);  opacity: 0.95; }
+}
+
+/* световое пятно «на полу» — медленно пульсирует */
+.hero__pool {
+  bottom: -28%; left: 50%; width: 70%; height: 60%;
+  margin-left: -35%;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 188, 120, 0.16), transparent 70%);
+  filter: blur(30px);
+  animation: poolBreath 9s ease-in-out infinite alternate;
+}
+@keyframes poolBreath {
+  0%   { transform: scale(0.92); opacity: 0.6; }
+  100% { transform: scale(1.06); opacity: 1; }
+}
+
+/* «фонарь» под курсором: двигается только transform'ом, throttle через rAF */
+.hero__torch {
+  top: 0; left: 0; width: 760px; height: 760px;
+  margin: -380px 0 0 -380px;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255, 206, 150, 0.2), rgba(255, 176, 110, 0.06) 38%, transparent 66%);
+  filter: blur(26px);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+  transform: translate3d(70vw, 16vh, 0);
+}
+.hero.is-lit .hero__torch { opacity: 1; }
+
+/* статичное зерно поверх (рисуется один раз, без затрат на кадр) */
+.hero__grain {
+  inset: 0; width: 100%; height: 100%;
+  opacity: 0.5; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  will-change: auto;
+}
+
 .hero__veil {
-  background: linear-gradient(180deg, rgba(14, 13, 11, 0.25), transparent 35%, transparent 70%, rgba(14, 13, 11, 0.8));
-  pointer-events: none;
+  background: linear-gradient(180deg, rgba(14, 13, 11, 0.35), transparent 32%, transparent 68%, rgba(14, 13, 11, 0.85));
 }
 .hero__top, .hero__title, .hero__bottom { position: relative; z-index: 2; }
+.hero__title { text-shadow: 0 0 80px rgba(255, 196, 130, 0.12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__beam, .hero__pool { animation: none; }
+  .hero__stage .hero__torch { display: none; }
+}
 .hero__top { display: flex; justify-content: space-between; gap: 24px; }
 .hero__note { font-size: clamp(13px, 1.1vw, 16px); line-height: 1.5; color: var(--paper-dim); }
 .hero__note i { color: var(--paper); font-size: 1.25em; }
