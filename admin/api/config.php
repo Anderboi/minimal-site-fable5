@@ -22,7 +22,7 @@
 define('GOOGLE_CLIENT_ID', '227077269131-nvare3n61db5nrq5apt63h2ol2148dik.apps.googleusercontent.com');
 
 define('ALLOWED_EMAILS', [
-    'your@gmail.com', // ← замените на ваш email
+    'minimal.buro@gmail.com',
 ]);
 
 // Пути на сервере (менять обычно не нужно)
