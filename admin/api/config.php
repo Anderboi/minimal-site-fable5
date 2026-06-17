@@ -6,7 +6,7 @@
  *   - Откройте https://console.cloud.google.com/
  *   - Создайте проект → APIs & Services → Credentials
  *   - + Create Credentials → OAuth 2.0 Client ID → Web application
- *   - Authorized JavaScript origins: https://polarisdesign.ru
+ *   - Authorized JavaScript origins: https://minimal-studio.ru
  *   - Скопируйте Client ID и вставьте в GOOGLE_CLIENT_ID ниже
  *
  * ШАГ 2 — РАЗРЕШЁННЫЕ EMAIL
