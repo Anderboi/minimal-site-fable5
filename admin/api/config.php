@@ -19,7 +19,7 @@
  *   chown -R www-data:www-data /var/www/html/data /var/www/html/assets/images/projects
  */
 
-define('GOOGLE_CLIENT_ID', 'ВСТАВЬТЕ_СЮДА.apps.googleusercontent.com');
+define('GOOGLE_CLIENT_ID', '227077269131-nvare3n61db5nrq5apt63h2ol2148dik.apps.googleusercontent.com');
 
 define('ALLOWED_EMAILS', [
     'your@gmail.com', // ← замените на ваш email
