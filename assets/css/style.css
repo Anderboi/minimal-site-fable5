@@ -413,7 +413,7 @@ body.menu-open .menu__nav a:nth-child(4) { transition-delay: 0.43s; }
 }
 .studio__stats {
   position: relative; z-index: 2;
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
   margin: clamp(64px, 9vw, 130px) 0;
   border-top: 1px solid var(--line-l); padding-top: clamp(24px, 3vw, 44px);
 }

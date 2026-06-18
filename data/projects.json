@@ -1,10 +1,10 @@
 {
   "projects": [
     {
-      "slug": "tishina",
-      "name": "Тишина",
+      "slug": "mirax",
+      "name": "Миракс",
       "type": "Квартира",
-      "location": "Москва, ЖК «Садовые кварталы»",
+      "location": "Москва, ЖК «Миракс»",
       "year": "2025",
       "area": "86 м²",
       "duration": "9 месяцев",
@@ -18,7 +18,7 @@
       "facts": [
         { "label": "Комнат", "value": "3" },
         { "label": "Санузлов", "value": "2" },
-        { "label": "Сценариев света", "value": "4" },
+        { "label": "Инженерных систем", "value": "4" },
         { "label": "Реализация", "value": "под ключ" }
       ],
       "cover": "assets/img/projects/tishina/cover.svg",
