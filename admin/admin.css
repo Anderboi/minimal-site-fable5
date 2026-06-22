@@ -135,6 +135,22 @@ body {
   border-radius: var(--radius);
   margin-bottom: 8px;
   box-shadow: var(--shadow);
+  transition: border-color .12s, background .12s, opacity .12s;
+}
+.proj-row__drag {
+  color: var(--border);
+  font-size: 18px;
+  cursor: grab;
+  user-select: none;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 0 2px;
+}
+.proj-row__drag:active { cursor: grabbing; }
+.proj-row--dragging { opacity: .35; }
+.proj-row--over {
+  border-color: var(--accent);
+  background: #fff8f7;
 }
 .proj-row__num {
   font-size: 11px;

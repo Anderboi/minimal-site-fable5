@@ -116,7 +116,8 @@
       return;
     }
     el.innerHTML = projects.map((p, i) => `
-      <div class="proj-row" data-slug="${esc(p.slug)}">
+      <div class="proj-row" draggable="true" data-slug="${esc(p.slug)}">
+        <span class="proj-row__drag" title="Перетащить">⠿</span>
         <span class="proj-row__num">${String(i + 1).padStart(2, '0')}</span>
         ${p.cover
           ? `<img class="proj-row__thumb" src="${esc(p.cover)}" alt="" onerror="this.style.opacity='.2'">`
@@ -126,8 +127,8 @@
           <div class="proj-row__meta">${esc(p.type)} · ${esc((p.location || '').split(',')[0])} · ${esc(p.year)} · ${esc(p.area)}</div>
         </div>
         <div class="proj-row__actions">
-          <button class="btn" data-action="edit">Редактировать</button>
-          <button class="btn btn--danger" data-action="delete">Удалить</button>
+          <button class="btn" data-action="edit" draggable="false">Редактировать</button>
+          <button class="btn btn--danger" data-action="delete" draggable="false">Удалить</button>
         </div>
       </div>
     `).join('');
@@ -146,6 +147,61 @@
     if (btn.dataset.action === 'edit') openForm(projects.find(p => p.slug === slug));
     if (btn.dataset.action === 'delete') confirmDelete(slug);
   });
+
+  // ── Drag-and-drop reorder ─────────────────────────────────────────
+  let dragSlug = null;
+
+  (function attachDrag() {
+    const list = document.getElementById('projects-list');
+
+    list.addEventListener('dragstart', e => {
+      const row = e.target.closest('.proj-row');
+      if (!row) return;
+      dragSlug = row.dataset.slug;
+      row.classList.add('proj-row--dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+
+    list.addEventListener('dragover', e => {
+      e.preventDefault();
+      const row = e.target.closest('.proj-row');
+      if (!row || row.dataset.slug === dragSlug) return;
+      list.querySelectorAll('.proj-row--over').forEach(r => r.classList.remove('proj-row--over'));
+      row.classList.add('proj-row--over');
+      e.dataTransfer.dropEffect = 'move';
+    });
+
+    list.addEventListener('dragleave', e => {
+      if (!e.currentTarget.contains(e.relatedTarget)) {
+        list.querySelectorAll('.proj-row--over').forEach(r => r.classList.remove('proj-row--over'));
+      }
+    });
+
+    list.addEventListener('drop', async e => {
+      e.preventDefault();
+      const targetRow = e.target.closest('.proj-row');
+      if (!targetRow || !dragSlug || targetRow.dataset.slug === dragSlug) return;
+
+      const fromIdx = projects.findIndex(p => p.slug === dragSlug);
+      const toIdx   = projects.findIndex(p => p.slug === targetRow.dataset.slug);
+      if (fromIdx === -1 || toIdx === -1) return;
+
+      const [moved] = projects.splice(fromIdx, 1);
+      projects.splice(toIdx, 0, moved);
+      renderList();
+
+      const res = await req('PATCH', 'projects.php', { order: projects.map(p => p.slug) });
+      if (res?.ok) toast('Порядок сохранён');
+      else toast('Ошибка сохранения порядка', true);
+    });
+
+    list.addEventListener('dragend', () => {
+      list.querySelectorAll('.proj-row--dragging, .proj-row--over').forEach(r => {
+        r.classList.remove('proj-row--dragging', 'proj-row--over');
+      });
+      dragSlug = null;
+    });
+  })();
 
   async function confirmDelete(slug) {
     const p = projects.find(x => x.slug === slug);
